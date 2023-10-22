@@ -34,4 +34,4 @@ Autres packages du `requirements.txt`
 
 # Auteurs
 
-Ce projet à été réaliser par Arthur PARMENTIER, Hugo ANDREANTICHAN, Annabelle NARSAMA et Leo GONDOUIN. 
+Ce projet à été réalisé par Arthur PARMENTIER, Hugo ANDREANTICHAN, Annabelle NARSAMA et Leo GONDOUIN. 
