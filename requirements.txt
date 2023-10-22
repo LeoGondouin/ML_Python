@@ -33,10 +33,6 @@ pandas
 plotly
 python-dateutil
 pytz
-pywin32
-pyzmq
-requests
-retrying
 scikit-learn
 scipy
 seaborn
