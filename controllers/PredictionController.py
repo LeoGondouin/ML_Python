@@ -4,13 +4,10 @@ from dash import Input, Output,State,html,dash_table
 import pandas as pd
 from server import app
 from datetime import date
-from controllers.process.ImportController import *
-import os
 import pickle
-path = "C:/Users/leogo/Documents/Prediction/Python_ML"
-os.chdir(path)
+from sklearn.preprocessing import StandardScaler
 
-cleaned = pd.read_csv("assets/data/cube.csv")
+cleaned = pd.read_csv("./assets/data/cube.csv")
 #Pour afficher le menu "Tableau de Bord"
 @app.callback(
     Output("menu-prediction", "className",allow_duplicate=True),
@@ -101,10 +98,11 @@ val_fonc=None
     State("txt-surface-terrain", "value"),
     State("txt-surface-nb-pieces", "value"),
     State("cb-Commune", "value"),
+    State("cb-type-local", "value"),
     prevent_initial_call=True   
 )  
 
-def predictValeurFonciere(n_clicks,surface_bati,surface_terrain,nbpiece,commune):
+def predictValeurFonciere(n_clicks,surface_bati,surface_terrain,nbpiece,commune,type_local):
     if n_clicks is not None:
         global val_fonc
         if surface_bati is None:
@@ -127,18 +125,28 @@ def predictValeurFonciere(n_clicks,surface_bati,surface_terrain,nbpiece,commune)
             nbpiece = int(nbpiece)
         except ValueError:
             return 'Veuillez renseigner un nombre de piece en format nombre entier','',{},{}
-        
         ref_commune = pd.read_csv("assets/data/ref_Commune.csv")
         line = ref_commune[ref_commune["Commune"]==commune]
         prix_m2 = line["Prix_m2"]         
         nb_ecoles = line["nombre_ecoles"]  
+        dictTypeLocal = {"Appartement":0,"Dependance":0,"Industriel":0,"Maison":0}
+        dictTypeLocal[type_local]=1
+        Xtest = pd.DataFrame()
+        Xtest["Surface reelle bati"] = [surface_bati]
+        Xtest["Surface terrain"] = [surface_terrain]
+        Xtest["Nombre pieces principales"] = [nbpiece]
+        Xtest["nombre_ecoles"] = [nb_ecoles]
+        Xtest["Prix_m2"] = [prix_m2]
+        Xtest["Appartement"] = dictTypeLocal["Appartement"]
+        Xtest["Dependance"] = dictTypeLocal["Dependance"]       
+        Xtest["Industriel"] = dictTypeLocal["Industriel"]
+        Xtest["Maison"] = dictTypeLocal["Maison"]
 
-        data = {"Surface reelle bati":[surface_bati],"Surface terrain":[surface_terrain],"Nombre pieces principales":[nbpiece],"nombre_ecoles":[nb_ecoles],"Prix_m2":[prix_m2]}
-        Xtest = pd.DataFrame(data=data)
+        scaler = StandardScaler()
+        Xtest[["Surface reelle bati","Surface terrain","Nombre pieces principales","nombre_ecoles","Prix_m2"]] = scaler.fit_transform(Xtest[["Surface reelle bati","Surface terrain","Nombre pieces principales","nombre_ecoles","Prix_m2"]])
         model = pickle.load(open("assets/data/model_prediction_valeur_fonciere.pkl","rb"))
+        val_fonc = model.predict(Xtest)[0]
         
-        val_fonc = model.predict(Xtest)
-
         return '',html.Div([f'Valeur foncière prédite : {val_fonc} €',html.Br()]),{"border":"solid 1px","text-align":"center","font-weight":"bold","justify-content": "center","display":"flex","align-items": "center","height":"60px","padding-bottom":"4px"},{"width":"130px","height":"30px","font-size":"20px","margin-top":"10px","display":"block","margin":"0 auto","top":"-35px"}
 
 @app.callback(

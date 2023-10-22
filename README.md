@@ -10,3 +10,4 @@ This is a Project template to build a Plotly Dash app as explained in [this post
 
 Problèmes pour importer les fichiers data il faut les remettre dans assets/data après le clone.
 Ne pas oublier de changer path avec le chemin relatif de vos fichiers de données pour pouvoir bien proccesser les données
+

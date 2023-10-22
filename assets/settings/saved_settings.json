@@ -1,1 +1,1 @@
-{"multi": false, "filterCb": false, "displayInScreen": true, "mapDetail": "Region"}
+{"multi": false, "filterCb": true, "displayInScreen": true, "mapDetail": "Commune"}

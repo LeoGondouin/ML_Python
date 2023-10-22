@@ -1,12 +1,8 @@
 import dash_html_components as html
 import dash_core_components as dcc
-from datetime import date
-from controllers.process.ImportController import *
-import os
+import pandas as pd
 
-path = "C:/Users/leogo/Documents/Prediction/Python_ML"
-os.chdir(path)
-cleaned = pd.read_csv("assets/data/cube.csv")
+cleaned = pd.read_csv("./assets/data/cube.csv")
 
 predictionForm=html.Div([html.H1("Prediction"),html.Span("Modèle > Prédire",className="breadcrumb"),html.Br(),
                             html.Div([
@@ -24,6 +20,13 @@ predictionForm=html.Div([html.H1("Prediction"),html.Span("Modèle > Prédire",cl
                                     html.Label("Nombre pieces principales",style={"font-weight":"bold"}),
                                     dcc.Input(id="txt-surface-nb-pieces", placeholder="Saisissez le nombre de pièces principales désirée",style={"width":"300px","margin-left":"10px","margin-top":"10px"}),
                                     html.Br(),
+                                    html.Br(),
+                                    html.Label("Type local",style={"margin-top":"10px","font-weight":"bold"}),
+                                    dcc.Dropdown(
+                                        id="cb-type-local",
+                                        options=["Appartement","Dependance","Industriel","Maison"],
+                                        style={"width":"300px","margin": "0 auto"}
+                                    ),
                                     html.Br(),
                                     html.Label("Région",style={"margin-top":"10px","font-weight":"bold"}),
                                     dcc.Dropdown(

@@ -6,16 +6,11 @@ from dash import html
 from server import app
 import plotly.express as px
 import numpy as np
-from controllers.process.ImportController import *
-import os 
+import pandas as pd
 import json
-import plotly.graph_objs as go
-import geopandas as gpd
 
 #region Import
-path = "C:/Users/leogo/Documents/Prediction/Python_ML"
-os.chdir(path)
-cleaned = pd.read_csv("assets/data/cube.csv")
+cleaned = pd.read_csv("./assets/data/cube.csv")
 #endregion
 #region Menu
 @app.callback(
