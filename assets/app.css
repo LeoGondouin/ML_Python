@@ -1,0 +1,48 @@
+#sidebar{
+    background-color:lightcoral;
+    color:white;
+    position:fixed;
+    height:100%;
+    width:20%;
+    text-align: center;
+    z-index:3;
+}
+
+.screen-menu{
+    position:relative;
+    margin-left:20%;
+    height:95%;
+    width:80%;
+    text-align:center
+}
+
+.active{
+    color:black
+}
+
+.breadcrumb{
+    float:right;
+    margin-right:10px;
+    font-style:italic;
+}
+
+.filters{
+    width:150px;
+    padding-right:5px;
+    padding-left:5px;
+}
+.filters-container{
+    padding-top:20px;
+    background-color: lightcoral;
+    display:flex;
+    margin-left:2.5%;
+    margin-right:2.5%;
+    width:95%;
+    height:100px
+}
+
+.graphs{
+    padding-left: 100px;
+    width: 500px;
+    height: 300px;
+}
