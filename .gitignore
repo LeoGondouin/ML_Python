@@ -1,2 +1,8 @@
 #Ignorer les données (trop volumineux)
-assets/data/
+assets/valeursfoncieres-2018.txt
+assets/valeursfoncieres-2019.txt
+assets/valeursfoncieres-2020.txt
+assets/valeursfoncieres-2021.txt
+assets/cubes.csv
+assets/model_prediction_valeur_fonciere.pkl
+assets/modele_machine_learning.pkl
