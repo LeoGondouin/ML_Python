@@ -1,6 +1,6 @@
 # Prédiction de valeur foncière
 
-Dans le cadre de notre cours de Machine Learning à l'Université Lumière Lyon 2 nous avions pour projet de faire une application en Dash qui permettrait de prédire la valeur foncière d'un bien 
+Dans le cadre de notre cours de Machine Learning à l'Université Lumière Lyon 2 nous avions pour projet de faire une application en Dash qui permettrait de prédire la valeur foncière d'un bien.
 
 # Les données
 
